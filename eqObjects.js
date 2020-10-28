@@ -6,6 +6,18 @@ const assertEqual = function(actual, expected) {
     console.log(`Assertion Failed: ${actual} === ${expected}`);
 };
 
+function eqArrays(arr1,arr2){
+  if(arr1.length!==arr2.length)
+    return false;
+  else{
+    var i;
+    for(i=0;i<arr1.length;i++){
+      if(arr1[i]!==arr2[i])
+        return false;
+    }
+    return true;
+  }
+}
 
 const eqObjects = function(object1, object2) {
   //console.log(typeof Object.keys(object1));
@@ -14,8 +26,9 @@ const eqObjects = function(object1, object2) {
     for(const objKey of Object.keys(object1)){
       //console.log("for", Object.keys(object2).indexOf(objKey));
       if(Object.keys(object2).indexOf(objKey)!=-1){
-       // console.log("if 2", object1[objKey], "   ", object2[objKey]);
-        if(object1[objKey]!==object2[objKey]){
+        //console.log("if 2", typeof object1[objKey], "   ", typeof object2[objKey]);
+        //if(typeof object2[objKey])
+        if(!eqArrays(object1[objKey],object2[objKey])){
          // console.log("if 3");
           return false;
         }
@@ -39,3 +52,13 @@ const ba = { b: "2", a: "1" };
 const abc = { a: "1", b: "2", c: "3" };
 assertEqual(eqObjects(ab, ba),true); 
 assertEqual(eqObjects(ab, abc),false);
+
+const cd = { c: "1", d: ["2", 3] };
+const dc = { d: ["2", 3], c: "1" };
+assertEqual(eqObjects(cd, dc),true);
+
+
+ const cd2 = { c: "1", d: ["2", 3, 4] };
+
+ assertEqual(eqObjects(cd, cd2),false);
+
