@@ -7,7 +7,7 @@
     console.log(`Assertion Failed: ${actual} === ${expected}`);
 };
  */
-function middle(arr){
+const middle =function(arr){
   let len=Math.floor(arr.length/2);
   let ans=[];
   if(arr.length%2===0)
